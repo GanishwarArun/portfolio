@@ -3,12 +3,42 @@ import { FaCode, FaExternalLinkAlt, FaGithub, FaChevronDown } from "react-icons/
 
 const projects = [
   {
+    title: "Flight Booking & Reservation System ",
+    description:
+      "A full-stack flight reservation system with authentication, real-time booking, and payment integration.",
+    category: "Full Stack",
+    techStack: ["React", "Node.js", "MongoDB", "Express.js"],
+    liveLink: "https://flight-booking-final-2.netlify.app/",
+    backendLiveLink: "https://flight-booking-and-reservation.onrender.com",
+
+    repoLink:
+      "https://github.com/GanishwarArun/flight-final-booking-and-reservation-frontend",
+    backendRepoLink:
+      "https://github.com/GanishwarArun/flight-booking-and-reservation-.git",
+  },
+
+  {
+    title: "Mental Health Counselling",
+    description:
+      "A comprehensive mental health counselling platform built with MERN stack.",
+    category: "Full Stack",
+    techStack: ["React", "Node.js", "MongoDB", "Express.js"],
+    liveLink: "https://mental-health-counselling.netlify.app/",
+    backendLiveLink: "https://mental-health-counselling-76d1.onrender.com",
+    repoLink:
+      "https://github.com/GanishwarArun/Mental--Health-Counselling-Frontend.git",
+    backendRepoLink:
+      "https://github.com/GanishwarArun/Mental--Health-Counselling-Backend.git",
+  },
+
+  {
     title: "Health & Wellness App",
     description:
       "A full-stack web application for health and wellness tracking.",
-    category: "MERN Full Stack",
+    category: "Full Stack",
     techStack: ["React", "Node.js", "MongoDB", "Express.js"],
     liveLink: "https://heath-wellness.netlify.app/",
+    backendLiveLink: "https://health-wellness-backend.onrender.com",
     repoLink: "https://github.com/GanishwarArun/Health-Wellness-Frontend",
     backendRepoLink:
       "https://github.com/GanishwarArun/health-wellness--Backend.git",
@@ -17,7 +47,7 @@ const projects = [
     title: "Garage Management System",
     description:
       "An AI-powered garage management system that streamlines vehicle diagnostics and service tracking.",
-    category: "Full Stack Internship Project",
+    category: "Full Stack ",
     techStack: ["React", "Node.js", "MongoDB", "Express.js", "AI"],
     liveLink: "https://app.crankcase.ai",
     repoLink: "https://github.com/robox-corp/garage-client",
@@ -25,21 +55,9 @@ const projects = [
   },
 
   {
-    title: "Flight Booking & Reservation System ",
-    description:
-      "A full-stack flight reservation system with authentication, real-time booking, and payment integration.",
-    category: "Cap Stone MERN Full Stack",
-    techStack: ["React", "Node.js", "MongoDB", "Express.js"],
-    liveLink: "https://flight-booking-final-2.netlify.app/",
-    repoLink:
-      "https://github.com/GanishwarArun/flight-final-booking-and-reservation-frontend",
-    backendRepoLink:
-      "https://github.com/GanishwarArun/flight-booking-and-reservation-.git",
-  },
-  {
     title: "Password Reset Flow ",
     description: "A full-stack password reset flow system using MERN stack.",
-    category: "MERN Full Stack",
+    category: "Full Stack",
     techStack: ["React", "Node.js", "MongoDB", "Express.js"],
     liveLink:
       "https://passwordresetflow-fullfsd-mernstack.netlify.app/user/login",
@@ -76,7 +94,7 @@ const projects = [
     title: "E-Cart App",
     description:
       "A fully responsive e-commerce cart application built with React and React Router.",
-    category: "Frontend React",
+    category: "Frontend",
     techStack: ["React", "TailwindCSS"],
     liveLink: "https://ganish-router-task6.netlify.app/",
     repoLink:
@@ -86,7 +104,7 @@ const projects = [
     title: "Income-Expense Calculator (JS DOM)",
     description:
       "A web-based income and expense tracker built using JavaScript DOM manipulation.",
-    category: "JavaScript Project",
+    category: "Frontend",
     techStack: ["JavaScript", "HTML", "CSS"],
     liveLink: "https://ganishwarinc-expcalculator-task-4.netlify.app/",
     repoLink:
@@ -104,20 +122,49 @@ const projects = [
 
 function Projects() {
   const [expandedProject, setExpandedProject] = useState(null);
+  const [activeCategory, setActiveCategory] = useState("All"); // Add this line
+
+  const categories = ["All", "Full Stack", "Frontend", "Backend"]; // Add this line
 
   const toggleProject = (index) => {
     setExpandedProject(expandedProject === index ? null : index);
   };
 
+  
+  const filteredProjects =
+    activeCategory === "All"
+      ? projects
+      : projects.filter((project) => project.category.includes(activeCategory));
+
   return (
     <section className="p-8 pt-24 min-h-screen bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-white">
       <h1 className="text-5xl font-bold text-center mb-10">Projects</h1>
+
+      {/* Add this category filter buttons section */}
+      <div className="flex justify-center gap-4 mb-8">
+        {categories.map((category) => (
+          <button
+            key={category}
+            onClick={() => setActiveCategory(category)}
+            className={`px-4 py-2 rounded-lg transition-all duration-300 ${
+              activeCategory === category
+                ? "bg-blue-500 text-white"
+                : "bg-gray-200 dark:bg-gray-700 hover:bg-blue-400"
+            }`}
+          >
+            {category}
+          </button>
+        ))}
+      </div>
+
       <div className="max-w-5xl mx-auto space-y-6">
-        {projects.map((project, index) => (
+        {/* Change projects.map to filteredProjects.map */}
+        {filteredProjects.map((project, index) => (
           <div
             key={index}
             className="bg-white dark:bg-gray-800 shadow-lg rounded-lg border dark:border-gray-700 p-4 transition-transform duration-300 hover:scale-105"
           >
+            {/* Rest of your existing project card code remains the same */}
             <div
               className="text-xl font-semibold flex items-center gap-2 cursor-pointer hover:text-blue-500 transition-colors duration-300 transform hover:scale-110"
               onClick={() => toggleProject(index)}
@@ -154,17 +201,28 @@ function Projects() {
                   ))}
                 </div>
                 <div className="flex justify-between">
-                  <a
-                    href={project.liveLink}
-                    className="text-blue-500 hover:underline flex items-center gap-1"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <FaExternalLinkAlt /> Live Demo
-                  </a>
+                  <div className="flex gap-4">
+                    <a
+                      href={project.liveLink}
+                      className="text-blue-500 hover:underline flex items-center gap-1"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <FaExternalLinkAlt /> Frontend Demo
+                    </a>
+                    {project.backendLiveLink && (
+                      <a
+                        href={project.backendLiveLink}
+                        className="text-blue-500 hover:underline flex items-center gap-1"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        <FaExternalLinkAlt /> Backend API
+                      </a>
+                    )}
+                  </div>
                   <div className="flex gap-4">
                     {project.repoLink ? (
-                      // For full-stack projects
                       <>
                         <a
                           href={project.repoLink}
@@ -186,7 +244,6 @@ function Projects() {
                         )}
                       </>
                     ) : (
-                      // For backend-only projects
                       <a
                         href={project.backendRepoLink}
                         className="text-blue-500 hover:underline flex items-center gap-1"
@@ -206,5 +263,6 @@ function Projects() {
     </section>
   );
 }
+
 
 export default Projects;
