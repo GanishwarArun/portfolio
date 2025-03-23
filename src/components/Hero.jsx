@@ -75,7 +75,7 @@ const Hero = () => {
         className="flex space-x-6"
       >
         <a
-          href="/Ganishwar_ppt_resume.pdf"
+          href="/Ganishwar ppt resume - (9  a) portfolio.pdf"
           target="_blank"
           rel="noopener noreferrer"
           className="bg-blue-500 hover:bg-blue-600 text-white px-8 py-4 rounded-lg text-xl font-semibold transition-transform transform hover:scale-105 shadow-lg"
